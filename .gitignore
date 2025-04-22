@@ -1,0 +1,2 @@
+#ingore log file and the changes to them.
+*.log
