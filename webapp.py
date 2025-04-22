@@ -12,7 +12,7 @@ dbhost = 'localhost'
 dbuser = 'postgres'
 dbdatabase = 'testchatdb'
 dbport  = '5432'
-dbpassword = "allmight.1"
+dbpassword = "letschatpassword"
 
 login_message = ""
 search_message = ""
