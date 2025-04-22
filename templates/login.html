@@ -1,0 +1,17 @@
+{%extends "base.html"%}
+
+
+{%block heading%}
+    <h1>Sign in</h1>
+    <form action="/api/login" method="post">
+        <label for="username">username</label><br>
+        <input type="text" name="username" id="usernameid" required><br>
+        <label for="password">password</label><br>
+        <input type="password" name="password" id="passwordid" required><br>
+        <input type="submit" value="sign in">
+        <button onclick="window.location.href='/create_user'">sign up?</button>
+    </form>
+    <h3>{{message}}</h3>
+
+
+{%endblock%}

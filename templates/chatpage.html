@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LetsChat😂</title>
+    <style>
+        body{
+            background-color: #176376;
+            color: white;
+            font-family:  sans-serif;
+        }
+        header{
+
+            background-color: rgb(28, 140, 159);
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px dotted;
+            height: 100px;
+            
+        }
+        header > span{
+            float: left;
+            
+        }
+        span{
+            border-radius: 5px;
+            background-color: #176376;
+            padding: 10px;
+            margin-bottom: 5px;
+            margin-left: 5px;
+            width: 200px;
+            height: 70px;
+        }
+        #operations{
+            background-color: rgb(28, 140, 159);
+            padding: 5px;
+            border-radius: 5px;
+            border: 2px dotted;
+            height: 550px;
+            position: relative;
+        }
+        #contacts{
+            width: 150px;
+            background-color: #176376;
+            height: 100%;
+            
+        }
+        #searchid{
+            position: relative;
+            right: 14px;
+            width: 150px;
+        }
+        #add_contacts{
+            background-color: #176376;
+            color: white;
+            font-family:  sans-serif;
+            position: relative;
+            top: 5px;
+            right: 14px;
+            
+        }
+        #chatheader{
+            padding-top: 2px;
+            padding-left: 15px;
+        }
+        #chat{
+            background-color: rgb(28, 140, 159);
+            padding: 5px;
+            border-radius: 5px;
+            border: 2px dotted;
+            width: 555px;
+            height: 450px;
+            position: absolute;
+            top: 5px;
+            left: 170px;
+        }
+        #text_input{
+            background-color: rgb(28, 140, 159);
+            padding: 5px;
+            border-radius: 5px;
+            border: 2px dotted;
+            position: absolute;
+            top: 480px;
+            left: 170px;
+            width: 555px;
+            height: 50px;
+        }
+        #messageid{
+            width: 490px;
+            height: 40px;
+            overflow: auto;
+            scrollbar-width: none; /* Firefox */ 
+        }
+        #send_button{
+            background-color: #176376;
+            color: white;
+            font-family:  sans-serif;
+            height: 40px;
+            position: relative;
+            bottom: 18px;
+            margin-left: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <span>
+                <h1>LetsChat😂</h1>
+        </span>
+        <span>
+                <h1>{{name}}</h1>
+        </span>
+    </header><br>
+    <div id="operations">
+        <div id="contacts">
+            <div id="chatheader">
+                <h1>chats</h1>
+                <form action="/api/add_contacts" method="post">
+                    <input type="hidden" name="user" value="{{name}}">
+                    <input type="search" name="search" id="searchid" placeholder="search chats">
+                    <input id="add_contacts" type="submit" value="add contact">
+                </form>
+                <h5 id="search message">{{search_message}}</h5>
+            </div>
+            <br>
+            <div >
+                <ul>
+                    {%for chats in contacts%}
+                    <li><form action="/api/get_chat" method="post">
+                            <input type="hidden" name="contact_chat" values="{{chats}}">
+                            <input type="submit" value="{{chats}}">
+                    </form></li><br>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+        <div id="chat">
+            <ul style="position: relative;">
+                {%for content in chats%}
+                    {%if content[0] == name%}
+                        <li style="position: absolute;left:0px;">{{content[1]}}</li>
+                    {%else%}
+                    <li style="position: absolute;right:0px;">{{content[1]}}</li>
+                    {%endif%}
+                {%endfor%}
+            </ul>
+        </div>
+        <div id="text_input">
+            <form action="/api/send_message" method="post">
+                <input type="hidden" name="user" value="{{name}}">
+                <textarea name="message" id="messageid" required></textarea>
+                <input id="send_button" type="submit" value="send">
+            </form>
+    
+        </div>
+    </div>
+
+</body>
+</html>
